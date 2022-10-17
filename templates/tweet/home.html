@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <h5 class="card-title">{{ user.nickname }}</h5>
+    <div class="feed">
+      <h1>이부분에 이미지(이미지원본 or 머신러닝을 학습한 이미지)와 카테고리를 불러와주세요<h1>
+          {% comment %} <img src="/media/{{ tw.img_log }}"> {% endcomment %}
+          {% comment %} <p>{{ tw.img_catagory }}</p> {% endcomment %}
+        </div>
+        <div class="container">
+          <form action="/home/" enctype="multipart/form-data" id="imageUploadForm" method="POST">
+            {% csrf_token%}
+            <input id="id_image" type="file" name="image" >
+            <input type="submit" class="button" value="이미지 업로드" name="img_upload"></input>
+          </form>
+        </div>
+      </body>
+
+    </html>
