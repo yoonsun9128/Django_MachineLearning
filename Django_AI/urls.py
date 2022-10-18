@@ -25,5 +25,6 @@ urlpatterns = [
     path("", include('tweet.urls')),
 ]
 
+
 # 파일을 저장하는 미디어파일 확장하기 위해
-# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

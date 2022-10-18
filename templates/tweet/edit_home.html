@@ -7,21 +7,12 @@
   </head>
 
   <body>
-        <!-- 업로드한 이미지 보여질 곳-->
-        {% if upload_img %}
-          {% for image in upload_img %}
-        <div class="card" style="width: 18rem;">
-          <img src="/media/{{ image.upload_img }}" alt="{{ image }}" class="card-img-top">
-          <div class="card-body">
-            <span class="badge bg-primary">카테고리</span>
-          </div>
-        </div>
-          {% endfor %}
-        {% endif %}
-        <!-- 업로드한 이미지 보여지는 끝 -->
+    <h5 class="card-title">{{ user.nickname }}</h5>
+    <div class="feed">
+      <h1>이부분에 이미지(이미지원본 or 머신러닝을 학습한 이미지)와 카테고리를 불러와주세요<h1>
            {% comment %} <img src="/media/{{ tweet.img_log }}"> {% endcomment %}
           {% comment %} <p>{{ tw.img_catagory }}</p> {% endcomment %}
-        <!-- 이미지 업로드 하는 부분 -->
+        </div>
         <div class="container">
           <form action="{% url 'home' %}" enctype="multipart/form-data" id="imageUploadForm" method="POST">
             {% csrf_token %}
@@ -29,7 +20,15 @@
             <button type="submit">버튼</button>
           </form>
         </div>
-        <!-- 이미지 업로드 끝 -->
       </body>
 
     </html>
+
+    <div class="card" style="width: 18rem;">
+        <img src="" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <button type="button" class="btn btn-outline-primary">버튼</button>
+        </div>
+      </div>
