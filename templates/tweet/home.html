@@ -8,12 +8,20 @@
 
   <body>
         <!-- 업로드한 이미지 보여질 곳-->
-        {% if upload_img %}
-          {% for image in upload_img %}
-        <div class="card" style="width: 18rem;">
-          <img src="/media/{{ image.upload_img }}" alt="{{ image }}" class="card-img-top">
-          <div class="card-body">
-            <span class="badge bg-primary">카테고리</span>
+        {% if total_img %}
+          {% for image1, image2 in total_img %}
+        <div style="">
+          <div class="card" style="width: 18rem;">
+            <img src="/media/{{ image1.upload_img }}" alt="{{ image1 }}" class="card-img-top">
+            <div class="card-body">
+              <span class="badge bg-primary"></span>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <img src="/media/images/{{ image2.upload_label_img }}" alt="{{ image2 }}" class="card-img-top">
+            <div class="card-body">
+              <span class="badge bg-primary"></span>
+            </div>
           </div>
         </div>
           {% endfor %}
