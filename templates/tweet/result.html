@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+    <title>Hello, world!</title>
+  </head>
+  <style>
+    .user-card {
+      margin: 20px auto auto;
+      width: 500px;
+      height:
+    }
+
+    .user-img {
+      background-size: cover;
+      background-position: center;
+      width: 500px;
+      height: 500px;
+    }
+
+    h2 {
+      text-align: center;
+      color: white;
+      background-color: #353535;
+    }
+
+    tr {
+      text-align: center;
+    }
+
+    .survival {
+      margin: 20px auto;
+      text-align: center;
+      font-weight: bold;
+      width: 400px;
+    }
+
+    h1 {
+      font-weight: bold;
+    }
+  </style>
+
+  <body>
+    <div class="survival">
+      {% if total_data.result == -1 %}
+        <h1>사진에서 사람을 찾을 수 없습니다.</h1>
+      {% elif total_data.result == 1 %}
+        <h1>당신은 생존했습니다!</h1>
+      {% elif total_data.result == 0 %}
+        <h1>당신은 사망했습니다!</h1>
+      {% endif %}
+    </div>
+    <div class="user-card">
+      {% if total_data.result == 1 %}
+        <h2>생존자 정보</h2>
+      {% elif total_data.result == 0 %}
+        <h2>사망자 정보</h2>
+      {% endif %}
+
+      <!-- 아래 user-img div에 user가 업로드한 사진(원본) 넣어줘야함 -->
+      <img class="user-img" src="/media/{{ total_data.images }}">
+      <table class="table table-dark table-hover">
+        <tbody>
+          <tr>
+            <th scope="row">이름</th>
+            <td>{{ total_data.name }}</td>
+          </tr>
+          <tr>
+            <th scope="row">나이</th>
+            <td>{{ total_data.age }}</td>
+          </tr>
+          <tr>
+            <th scope="row">성별</th>
+            {% if total_data.gender == 0 %}
+              <td colspan="2">남자</td>
+            {% elif total_data.gender == 1 %}
+              <td colspan="2">여자</td>
+            {% endif %}
+          </tr>
+          <tr>
+            <th scope="row">동승 인원</th>
+            <td colspan="2">{{ total_data.family_size }}</td>
+          </tr>
+          <tr>
+            <th scope="row">운임 요금</th>
+            <td colspan="2">{{ total_data.fare }}</td>
+          </tr>
+          <tr>
+            <th scope="row">객실 등급</th>
+            {% if total_data.p_class == 0 %}
+              <td colspan="2">S Class</td>
+            {% elif total_data.p_class == 2 %}
+              <td colspan="2">A Class</td>
+            {% elif total_data.p_class == 4 %}
+              <td colspan="2">B Class</td>
+            {% elif total_data.p_class == 6 %}
+              <td colspan="2">입석</td>
+            {% endif %}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <form action="/">
+      <button class="btn btn-outline-secondary" type="submit" style="width: 150px; margin: auto; display: block">다시 하기
+      </button>
+    </form>
+  </body>
+</html>

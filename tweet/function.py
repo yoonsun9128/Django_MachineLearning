@@ -52,6 +52,7 @@ def photo(img):
         resultImg,faceBoxes=highlightFace(faceNet,frame)
         if not faceBoxes:
             print("No face detected")
+            return 0, 0
 
         for faceBox in faceBoxes:
             face=frame[max(0,faceBox[1]-padding):
@@ -73,7 +74,7 @@ def photo(img):
 
             cv2.putText(resultImg, f'{gender}, {age}', (faceBox[0], faceBox[1]-10),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,255,255), 2, cv2.LINE_AA)
-                # cv2.imshow("Detecting age and gender", resultImg)
+            # cv2.imshow("Detecting age and gender", resultImg)
     
     return result_gender, result_age
 
@@ -85,7 +86,5 @@ def is_survived(passenger_info:list) -> int:
     # 입력 = [[객실등급, 성별(남자1, 여자0), 요금, 탑승위치(0, 1, 2), 나이(밴드형식), 같이온사람의 수, 혼자왔나?]]
     # 결과 = model.predict(입력)
     # 살았으면 1 죽었으면 0
-
     # # name, 객실 등급(1,2,3), 요금, 탑여승위치(인천항, 수 광양항, 부산항), 같이 온 사람들()
-    print(result)
     return result

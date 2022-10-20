@@ -1,15 +1,9 @@
-from copyreg import pickle
-from pdb import post_mortem
 import pandas as pd
 import matplotlib.pyplot as plt
-from IPython.display import display
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split #training and testing data split
 from sklearn import metrics #accuracy measure
 import joblib
-import torch
-
-plt.style.use('fivethirtyeight')
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -17,8 +11,8 @@ warnings.filterwarnings('ignore')
 # 2번 file https://welcome-to-dewy-world.tistory.com/5?category=913368
 # 3번 file https://welcome-to-dewy-world.tistory.com/6
 
-train_data=pd.read_csv('/titanic/train.csv')
-test_data=pd.read_csv('/titanic/test.csv')
+train_data=pd.read_csv('./Data_Learn/titanic/train.csv')
+test_data=pd.read_csv('./Data_Learn/titanic/test.csv')
 
 # print(train_data.head())
 
@@ -103,8 +97,9 @@ joblib.dump(model, 'titanic_LR_model.pkl')
 prediction3=model.predict(test_X)
 print('The accuracy of the Logistic Regression is',metrics.accuracy_score(prediction3,test_Y))
 
-test_x = [[1, 0, 10.0000, 1, 1, 1, 1]]
+test_x = [[5, 0, 300, 1, 2, 0, 1]]
 test_test = model.predict(test_x)
+print(test_test)
 # print('The accuracy of the Logistic Regression is',metrics.accuracy_score(test_test,))
 
 
