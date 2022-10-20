@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  </head>
+
+  <body>
+        <!-- 업로드한 이미지 보여질 곳-->
+        {% if total_img %}
+          {% for image1, image2, category in total_img %}
+        <div style="display: flex;">
+          <div class="card" style="width: 18rem;">
+            <img src="/media/{{ image1.upload_img }}" alt="{{ image1 }}" class="card-img-top">
+            <div class="card-body">
+              <span class="badge bg-primary"></span>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <img src="/media/images/{{ image2.upload_label_img }}" alt="{{ image2 }}" class="card-img-top">
+            <div class="card-body">
+              <span class="badge bg-primary">{{ category }}</span>
+            </div>
+          </div>
+        </div>
+          {% endfor %}
+        {% endif %}
+        <!-- 업로드한 이미지 보여지는 끝 -->
+
+        <!-- 이미지 업로드 하는 부분 -->
+        <div class="container">
+          <form action="{% url 'home' %}" enctype="multipart/form-data" id="imageUploadForm" method="POST">
+            {% csrf_token %}
+            <input id="id_image" type="file" name="upload_img" ></input>
+            <button type="submit">버튼</button>
+          </form>
+        </div>
+        <!-- 이미지 업로드 끝 -->
+      </body>
+
+    </html>
