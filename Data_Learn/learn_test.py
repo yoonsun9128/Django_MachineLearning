@@ -1,8 +1,7 @@
-import os
+import joblib
 
-a = os.listdir('/titanic')
+model = joblib.load('./Django_MachineLearning/titanic_LR_model.pkl')
 
-print(a)
-
-for i in map(lambda x:x.split('.')[0], a):
-    print(i)
+test_x = [[1, 0, 10.0000, 1, 1, 1, 1]]
+test_test = model.predict(test_x)
+print(test_test)

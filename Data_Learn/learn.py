@@ -1,11 +1,12 @@
+from copyreg import pickle
 from pdb import post_mortem
 import pandas as pd
 import matplotlib.pyplot as plt
 from IPython.display import display
-from sklearn import svm
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split #training and testing data split
 from sklearn import metrics #accuracy measure
+import joblib
 import torch
 
 plt.style.use('fivethirtyeight')
@@ -16,11 +17,9 @@ warnings.filterwarnings('ignore')
 # 2번 file https://welcome-to-dewy-world.tistory.com/5?category=913368
 # 3번 file https://welcome-to-dewy-world.tistory.com/6
 
-# 데이터를 불러오고 보여준다.
 train_data=pd.read_csv('/titanic/train.csv')
 test_data=pd.read_csv('/titanic/test.csv')
 
-# data.head()는 앞의 5개만을 보여준다.
 # print(train_data.head())
 
 for col in train_data.columns :
@@ -32,15 +31,10 @@ for col in test_data.columns :
     # print(msg)
 
 train_data.isnull().sum()
-# print(train_data.isnull().sum())
-# train_data 열 부분의 비어있는 데이터 모두 sum() 하여 보여줌
 
 train_data['Initial']= train_data.Name.str.extract('([A-Za-z]+)\.')
-
 test_data['Initial']= test_data.Name.str.extract('([A-Za-z]+)\.')
 
-# print(test_data.Name.str.extract('([A-Za-z]+)\.'))
-# print(train_data.Name.str.extract('([A-Za-z]+)\.'))
 
 train_data['Initial'].replace(['Mlle','Mme','Ms','Dr','Major','Lady','Countess','Jonkheer','Col','Rev','Capt','Sir','Don'],['Miss','Miss','Miss','Mr','Mr','Mrs','Mrs','Other','Other','Other','Mr','Mr','Mr'],inplace=True)
 test_data['Initial'].replace(['Mlle','Mme','Ms','Dr','Major','Lady','Countess','Jonkheer','Col','Rev','Capt','Sir','Don'],['Miss','Miss','Miss','Mr','Mr','Mrs','Mrs','Other','Other','Other','Mr','Mr','Mr'],inplace=True)
@@ -92,8 +86,10 @@ train_data.drop(['Name','Age','Ticket','Cabin','PassengerId','SibSp','Parch','In
 train,test=train_test_split(train_data,test_size=0.3,random_state=0,stratify=train_data['Survived'])
 train_X=train[train.columns[1:]]
 train_Y=train[train.columns[:1]]
+
 test_X=test[test.columns[1:]]
 test_Y=test[test.columns[:1]]
+
 X=train_data[train_data.columns[1:]]
 Y=train_data['Survived']
 
@@ -101,20 +97,17 @@ print(test_X)
 # print(test_Y)
 
 model = LogisticRegression()
-model.fit(train_X,train_Y)
-prediction3=model.predict(test_X)
+model.fit(train_X.values,train_Y)
+joblib.dump(model, 'titanic_LR_model.pkl')
 
-test_x = [[1, 0, 10.0000, 1, 1, 1, 1]]
+prediction3=model.predict(test_X)
 print('The accuracy of the Logistic Regression is',metrics.accuracy_score(prediction3,test_Y))
 
-for i in test_X:
-    print(i.Pclass)
-
-print(model.predict(test_x))
+test_x = [[1, 0, 10.0000, 1, 1, 1, 1]]
 test_test = model.predict(test_x)
+print(dir(test_test))
+# print('The accuracy of the Logistic Regression is',metrics.accuracy_score(test_test,))
 
-# https://cocook.tistory.com/46 모델 저장 방법
-# print('The accuracy of the Logistic Regression is',metrics.accuracy_score(test_test,[[0, 1]]))
 
 # exe_model = torch.load(temp_model)
 # results = exe_model(test_input)

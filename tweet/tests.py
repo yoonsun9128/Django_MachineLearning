@@ -1,6 +1,7 @@
 from django.test import TestCase
 import torch
 import cv2
+import joblib
 
 # Create your tests here.
 def change_img(file_path):
@@ -29,3 +30,7 @@ def change_img(file_path):
 
     return changed_img_file_path, category_list
 
+def is_survived(passenger_info:list) -> int:
+    model = joblib.load('./Django_MachineLearning/titanic_LR_model.pkl')
+    test_test = model.predict
+    return 
