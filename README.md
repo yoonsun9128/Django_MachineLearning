@@ -1,4 +1,6 @@
   ## 내일배움캠프 project 2. Django_AI
+ 
+   ![image](https://ifh.cc/g/JoKNoJ.jpg)
 
   <p>
       <img src="https://img.shields.io/badge/Django-4.1.1-green"/>
@@ -44,9 +46,9 @@
 
   |페이지|기능|API URL|Method|Request(요청)|Response(응답)|
   |------|------|------|------|------|------|
-  |로그인|login|login/|POST||-|-|
-  |회원가입|singup|signup/|GET,POST|-|-|
-  |메인|images upload|home/|GET,POST|-|-|
+  |로그인|login|login/|POST||username,password|'user/login','user/login.html'|
+  |회원가입|singup|signup/|GET,POST|username,passoword,nickname|'user/signup.html',redirect('/login')|
+  |메인|images upload|home/|GET,POST|temp,temp2,category,result,|'tweet/home.html', {'total_img': result},redirect('/')|
   
 
 
@@ -57,7 +59,7 @@
 
   * home,signup,main
 
-    ![image](https://ifh.cc/g/6lrCYY.png)
+    ![image](https://ifh.cc/g/BJ4DVx.png)
 
 
 
