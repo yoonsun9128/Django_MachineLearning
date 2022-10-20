@@ -61,58 +61,67 @@
 
     <div class="img"></div>
     <div class="survival">
-      <h4>당신은 생존했습니다!</h4>
+        {% if result == 1 %}
+        <h4>당신은 생존했습니다!</h4>
+        {% elif result == 0 %}
+        <h4>당신은 사망했습니다!</h4>
+        {% endif %}
     </div>
 
     <form action="{% url 'home' %}" enctype="multipart/form-data" id="imageUploadForm" method="POST">
+      {% csrf_token %}
       <!-- 사진 업로드 하는 부분-->
       <div class="input-group">
-        <input type="file" class="form-control" id="id_image" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="upload_img">
+        <input type="file" class="form-control" id="upload_img" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="upload_img" placeholder="sadasd">
       </div>
       <!-- 사용자가 입력하는 부분-->
       <div class="input-box">
         <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1">이름</span>
-          <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1">
+          <span class="input-group-text" id="basic-addon1" name='name'>이름</span>
+          <input type="text" class="form-control" placeholder="이름을 입력해주세요" aria-label="Username" aria-describedby="basic-addon1">
         </div>
         <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1">객실 등급</span>
-          <select class="form-select" aria-label="Default select example">
+          <span class="input-group-text" id="p_class" >객실 등급</span>
+          <select class="form-select" aria-label="Default select example" name="p_class">
             <option selected="selected">--- 객실의 등급을 선택 해주세요! ---</option>
-            <option value="1">S Class</option>
-            <option value="2">A Class</option>
-            <option value="3">B Class</option>
+            <option value="0" >S Class</option>
+            <option value="1">A Class</option>
+            <option value="2">B Class</option>
           </select>
         </div>
         <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1">운임요금</span>
-          <input type="text" class="form-control" placeholder="운임요금을 입력해주세요" aria-label="Username" aria-describedby="basic-addon1">
+          <span class="input-group-text" id="fare" >운임요금</span>
+          <input type="text" class="form-control" placeholder="운임요금을 입력해주세요" aria-label="fare" aria-describedby="basic-addon1" name='fare'>
         </div>
         <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1">동승객</span>
-          <select class="form-select" aria-label="Default select example">
+          <span class="input-group-text" id="family_size">동승객</span>
+          <select class="form-select" aria-label="Default select example" name='family_size'>
             <option selected="selected">--- 동승한 사람의 수를 선택해주세요! ---</option>
-            <option value="1">없음</option>
-            <option value="2">1 명</option>
-            <option value="3">2 명</option>
-            <option value="4">3 명</option>
-            <option value="5">4 명</option>
-            <option value="6">5 명</option>
+            <option value="0">없음</option>
+            <option value="1">1 명</option>
+            <option value="2">2 명</option>
+            <option value="3">3 명</option>
+            <option value="4">4 명</option>
+            <option value="5">5 명</option>
           </select>
         </div>
 
         <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1">선착장</span>
-          <select class="form-select" aria-label="Default select example">
+          <span class="input-group-text" id="barked">선착장</span>
+          <select class="form-select" aria-label="Default select example" name='barked'>
             <option selected="selected">--- 탑승하신 선착장을 선택해주세요! ---</option>
-            <option value="1">인천항</option>
-            <option value="2">여수광양항</option>
-            <option value="3">부산항</option>
+            <option value="0">인천항</option>
+            <option value="1">여수광양항</option>
+            <option value="2">부산항</option>
           </select>
         </div>
       </div>
       <!-- 사용자 입력 제출 버튼-->
       <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04" style="width: 150px; margin: auto; display: block">결과 보기
+      </button>
+    </form>
+    <form>
+      <button  class="btn btn-outline-secondary" type="submit" style="width: 150px; margin: auto; display: block">다시 하기
       </button>
     </form>
 

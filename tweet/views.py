@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
-from . import tests
+from . import function, tests
 from django.contrib.auth import authenticate
 from .models import TweetModel
+import os
+from uuid import uuid4
+from Django_AI.settings import MEDIA_URL, MEDIA_ROOT
 
 # Create your views here.
 
@@ -15,30 +18,45 @@ def home(request):
     if request.method == 'GET': 
         user = request.user.is_authenticated
         if user:
-            temp = TweetModel.objects.values('upload_img')
-            temp2 = TweetModel.objects.values('upload_label_img')
-            category = TweetModel.objects.values('category')
-            result = zip(temp, temp2, category)
-            
-            return render(request, 'tweet/home.html', {'total_img': result})
+            return render(request, 'tweet/home.html')
         else:
             return redirect('/login')
             
     elif request.method == 'POST':
         user = request.user.is_authenticated
         tweet = TweetModel()
-
         upload_img = request.FILES['upload_img']
-
         tweet.upload_img = upload_img
         tweet.save()
-
-        tweet = TweetModel.objects.get(upload_img=f'images/{upload_img}')
-
-        upload_label_img, category = tests.change_img(upload_img)
         
-        tweet.category = category
-        tweet.upload_label_img = upload_label_img
+        temp_gender, temp_age = function.photo(tweet.upload_img)
+        tweet.age = temp_age
+        tweet.gender = temp_gender
         tweet.save()
+        # ['Female'] ['(25-32)']
+
+        print(request.POST)
+        p_class = int(request.POST['p_class'])
+        gender = 1
+        if temp_gender[0] == 'Female':
+            gender = 0
+        fare = float(request.POST.get('fare'))
+        barked = int(request.POST.get('barked'))
+
+        age = temp_age
+        band_age = 0
         
+        family_size = int(request.POST.get('family_size'))
+        alone = 0
+        if family_size == 0:    
+            alone = 1
+        user_info = [[p_class, gender, fare, barked, 2, family_size, alone]]
+        result = 0
+        # result = function.is_survived(user_info)
+
+        return render(request, 'tweet/home.html', {'result': result}) # html 에서 result 0 이면 죽음 1이면 새
+
+
+def replay(request):
+    if request.method == 'GET':
         return redirect('/')

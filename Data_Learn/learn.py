@@ -105,7 +105,6 @@ print('The accuracy of the Logistic Regression is',metrics.accuracy_score(predic
 
 test_x = [[1, 0, 10.0000, 1, 1, 1, 1]]
 test_test = model.predict(test_x)
-print(dir(test_test))
 # print('The accuracy of the Logistic Regression is',metrics.accuracy_score(test_test,))
 
 
