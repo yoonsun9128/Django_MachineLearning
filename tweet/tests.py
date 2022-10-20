@@ -6,16 +6,25 @@ import cv2
 def change_img(file_path):
     # file_path -> img_upload
     model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
-    img = cv2.imread(file_path)
 
-    results = model(img)
+    fixed_path = f'./media/images/{file_path}'
+    changed_file_store_path = f'./media/images/after_image{file_path}'
 
-    changed_file_path = ''
-    # results.save()
+    origin_img = cv2.imread(fixed_path)
+    changed_img = cv2.imread(fixed_path)
+
+    results = model(origin_img)
     result = results.pandas().xyxy[0].to_numpy()
 
-    result = [item for item in result if item[6]=='person']
+    for i in range(len(result)):
+        cv2.rectangle(changed_img, (int(results.xyxy[0][i][0].item()), int(results.xyxy[0][i][1].item())), 
+              (int(results.xyxy[0][i][2].item()), int(results.xyxy[0][i][3].item())), (0,255,255))
+    
+    cv2.imwrite(changed_file_store_path, changed_img)
+    # filename, changed_img
 
     category_list = list({x[6] for x in result})
 
-    return changed_file_path, category_list
+    changed_img_file_path = f'after_image{file_path}'
+
+    return changed_img_file_path, category_list
