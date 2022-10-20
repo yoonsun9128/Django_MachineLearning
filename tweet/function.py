@@ -78,12 +78,14 @@ def photo(img):
     return result_gender, result_age
 
 def is_survived(passenger_info:list) -> int:
-    model = joblib.load('.titanic_LR_model.pkl')
+    # model = joblib.load('titanic_LR_model.pkl')
+    # file_name = 'titanic_LR_model.pkl'
+    model = joblib.load('titanic_LR_model.pkl')
     result = model.predict(passenger_info)
-
     # 입력 = [[객실등급, 성별(남자1, 여자0), 요금, 탑승위치(0, 1, 2), 나이(밴드형식), 같이온사람의 수, 혼자왔나?]]
     # 결과 = model.predict(입력)
     # 살았으면 1 죽었으면 0
 
     # # name, 객실 등급(1,2,3), 요금, 탑여승위치(인천항, 수 광양항, 부산항), 같이 온 사람들()
-    return result.pop()
+    print(result)
+    return result

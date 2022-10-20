@@ -36,7 +36,7 @@ def home(request):
         # ['Female'] ['(25-32)']
 
         print(request.POST)
-        p_class = request.POST['p_class']
+        p_class = int(request.POST['p_class'])
         gender = 1
         if temp_gender[0] == 'Female':
             gender = 0
@@ -50,17 +50,13 @@ def home(request):
         alone = 0
         if family_size == 0:    
             alone = 1
-
-        user_info = [[p_class, gender, fare, barked, 1, family_size, alone]]
-
+        user_info = [[p_class, gender, fare, barked, 2, family_size, alone]]
         result = 0
-        result = function.is_survived(user_info)
-        
-        if result == 0:
-            print('주금')
-        else:
-            print('생존')
+        # result = function.is_survived(user_info)
 
         return render(request, 'tweet/home.html', {'result': result}) # html 에서 result 0 이면 죽음 1이면 새
 
 
+def replay(request):
+    if request.method == 'GET':
+        return redirect('/')

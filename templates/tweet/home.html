@@ -61,11 +61,11 @@
 
     <div class="img"></div>
     <div class="survival">
-      {% if result == 0 %}
-      <h4>당신은 사망했습니다!</h4>
-      {% else%}
-      <h4>당신은 생존했습니다!</h4>
-      {% endif %}
+        {% if result == 1 %}
+        <h4>당신은 생존했습니다!</h4>
+        {% elif result == 0 %}
+        <h4>당신은 사망했습니다!</h4>
+        {% endif %}
     </div>
 
     <form action="{% url 'home' %}" enctype="multipart/form-data" id="imageUploadForm" method="POST">
@@ -118,6 +118,10 @@
       </div>
       <!-- 사용자 입력 제출 버튼-->
       <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04" style="width: 150px; margin: auto; display: block">결과 보기
+      </button>
+    </form>
+    <form>
+      <button  class="btn btn-outline-secondary" type="submit" style="width: 150px; margin: auto; display: block">다시 하기
       </button>
     </form>
 
