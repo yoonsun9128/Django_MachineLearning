@@ -5,7 +5,7 @@ import cv2
 # Create your tests here.
 def change_img(file_path):
     # file_path -> img_upload
-    model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
+    model = torch.hub.load('ultralytics/yolov5', 'yolov5l', pretrained=True)
 
     fixed_path = f'./media/images/{file_path}'
     changed_file_store_path = f'./media/images/after_image{file_path}'
@@ -18,7 +18,7 @@ def change_img(file_path):
 
     for i in range(len(result)):
         cv2.rectangle(changed_img, (int(results.xyxy[0][i][0].item()), int(results.xyxy[0][i][1].item())), 
-              (int(results.xyxy[0][i][2].item()), int(results.xyxy[0][i][3].item())), (0,255,255))
+              (int(results.xyxy[0][i][2].item()), int(results.xyxy[0][i][3].item())), (255,0,0))
     
     cv2.imwrite(changed_file_store_path, changed_img)
     # filename, changed_img
@@ -28,3 +28,4 @@ def change_img(file_path):
     changed_img_file_path = f'after_image{file_path}'
 
     return changed_img_file_path, category_list
+
