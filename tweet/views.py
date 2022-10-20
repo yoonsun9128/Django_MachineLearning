@@ -6,6 +6,12 @@ from .models import TweetModel
 # Create your views here.
 
 def home(request):
+    """
+    test <QuerySet [{'id': 10, 'upload_img': 'images/KakaoTalk_20221018_164355499.jpg', 
+    'upload_label_img': 'after_imageKakaoTalk_20221018_164355499.jpg', 
+    'category': "['car']"}, 
+    {'id': 11, 'upload_img': 'images/gyuhyeon.jpg', 'upload_label_img': 'after_imagegyuhyeon.jpg', 'category': "['person']"}]>
+    """
     if request.method == 'GET': 
         user = request.user.is_authenticated
         if user:
