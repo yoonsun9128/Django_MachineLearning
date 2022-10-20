@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls.static import static # djaongo 이미지 불러오기
+# from django.conf.urls.static import static # djaongo 이미지 불러오기
 from django.conf import settings #django 이미지 불러오기
 
 
@@ -27,4 +27,4 @@ urlpatterns = [
 
 
 # 파일을 저장하는 미디어파일 확장하기 위해
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
