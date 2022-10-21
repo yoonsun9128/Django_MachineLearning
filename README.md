@@ -1,4 +1,5 @@
-  ## 내일배움캠프 project 2. Django_AI
+  ## project 2. Django_MachineLearning
+  ## B-8 연봉팔조
  
    ![image](https://ifh.cc/g/JoKNoJ.jpg)
 
@@ -106,20 +107,6 @@
 
   ***
 
-
-  ### 트러블 슈팅 <a href="" >(상세보기)</a>
-
-  ***
-
-
-  ### 배포
-  배포링크 추가 예정
-
-  ***
-
-
-  ### 시연영상
-  영상링크 추가 예정
 
 
 
